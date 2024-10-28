@@ -1,1 +1,23 @@
+/*
 
+This is example is from SAASWithServiceNow channel.
+
+This script is a part of testing for the Quarantine email reminders for the requesters.
+This section is about collecting the records of the requests raised and approved.
+1) Find matching requests.
+2) Check requests that had been completed 337 days ago.
+3) Check for the request and that the requestor is still active.
+3) Trigger email to remind that request that the Quarantine exception expires in 4 weeks.
+4) The email includes details from the request - date, the email address that will be affected, and the business justification given. A link to the Quarantine review form
+
+*/
+
+var gr = new GlideRecord('incident');  // Create the object for the query
+
+gr.addActiveQuery();  // creat teh query object
+gr.query('request'); // The of record that we are querying
+while(gr.next())   // Walk through the list of records
+  {
+	gs.log("The incident number is " + gr.number); // print teh record number (Simple example)
+  }
+  gr.setNoCount;    // Loop to the next record in the list
