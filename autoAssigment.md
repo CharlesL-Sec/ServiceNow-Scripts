@@ -1,4 +1,4 @@
-## This script is used in a ServiceNow Auto Assign rule to assign incident to a specific group when a reat is created int eh specified table.
+## This script is used in a ServiceNow Auto Assign rule to assign a SIR incident to a specific group when a new incident in sn-si_incidents is created int the specified table.
 
 ### ServiceNow Assigment rules - 'sysrule_assignment.list'
 
@@ -6,7 +6,7 @@
 function getAssignee() {
 
 // Based on script from - https://www.servicenow.com/community/developer-forum/assign-a-incident-automatically-to-a-user-in-group/m-p/1529430
- var groupName = 'soc_incident_repsonder';
+ var groupName = 'SOC_INCIDENT_REPSONDER';
 // Get a list of members for this group
 
 var members = [];
