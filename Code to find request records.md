@@ -12,6 +12,7 @@ This section is about collecting the records of the requests raised and approved
 
 */
 
+```javascript
 var gr = new GlideRecord('incident');  // Create the object for the query
 
 gr.addActiveQuery();  // Create the query object
@@ -21,3 +22,4 @@ while(gr.next())   // Walk through the list of records
 	gs.log("The incident number is " + gr.number); // print thhe record number (Simple example)
   }
   gr.setNoCount;    // Loop to the next record in the list
+```
