@@ -4,8 +4,7 @@
 ####  sys
 |Purpose    | Command  |
 |:-----------|:----------|
-
-
+|: List scopes within the instance  |   sys_scope.LIST|
 
 
 
