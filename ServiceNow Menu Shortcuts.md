@@ -1,7 +1,7 @@
 # ServiceNow Menu links and shortcuts
 
 
-####  sys
+####  Start from the ALL Menu
 |Purpose    | Command  |
 |:-----------|:----------|
 |List scopes within the instance  |   sys_scope.LIST|
