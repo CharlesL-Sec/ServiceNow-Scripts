@@ -1,19 +1,14 @@
-## This script is used in a ServiceNow Auto Assign rule to assign a SIR incident to a specific group when a new incident in sn-si_incidents is created int the specified table.
-
-### ServiceNow Assigment rules - 'sysrule_assignment.list'
-
-```javascript
-function getAssignee() {
-
 // Based on script from - https://www.servicenow.com/community/developer-forum/assign-a-incident-automatically-to-a-user-in-group/m-p/1529430
  var groupName = 'SOC Incident Auto Assignment';
 // Get a list of members for this group
+// Corrected incident table to sn_si_incident.
+function getAssignee() {
 
 var members = [];
 var gm = new GlideRecord('sys_user_grmember');
 gm.addQuery('user.active', true);
 gm.addQuery('group.name', groupName);
-gm.query();
+gm.query();a
  while (gm.next()) {
   members.push(String(gm.user));
 }
@@ -21,7 +16,7 @@ gm.query();
 var counts = [], agg, count;
 for (var i = 0; i < members.length; i++) {
   count = 0;
-  agg = new GlideAggregate('incident');
+  agg = new GlideAggregate('sn_si_incident');
   agg.addActiveQuery();
   agg.addQuery('assignment_group.name', groupName);
   agg.addQuery('assigned_to', members[i]);
@@ -57,6 +52,3 @@ if (user.get(userID)) {
 }
 
 gs.info(getAssignee());
-
-
-```
