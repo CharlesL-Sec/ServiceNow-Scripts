@@ -1,3 +1,8 @@
+# ServiceNow SIR Assignnment Script
+
+
+
+```json
 // Based on script from - https://www.servicenow.com/community/developer-forum/assign-a-incident-automatically-to-a-user-in-group/m-p/1529430
  var groupName = 'SOC Incident Auto Assignment';
 // Get a list of members for this group
@@ -52,3 +57,4 @@ if (user.get(userID)) {
 }
 
 gs.info(getAssignee());
+```
