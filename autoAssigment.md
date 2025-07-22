@@ -13,7 +13,7 @@ var members = [];
 var gm = new GlideRecord('sys_user_grmember');
 gm.addQuery('user.active', true);
 gm.addQuery('group.name', groupName);
-gm.query();a
+gm.query();
  while (gm.next()) {
   members.push(String(gm.user));
 }
