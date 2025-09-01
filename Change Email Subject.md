@@ -1,4 +1,4 @@
-# Change email ingestino subject line
+# Change email ingestion subject line for email to SIR 
 
 ### From ServiceNow community post
 - https://www.servicenow.com/community/developer-forum/email-client-script-dynamically-changing-subject-line/m-p/2855879
