@@ -1,55 +1,92 @@
-# Add frendly date to notification
+# Add friendly date to notification
 - Adds a friendly date to the notification.
+- More direct instructions.
 
 ```javascript
   (function runMailScript(current, template, email, email_action, event) {
-    try {
-        var nextUpdateVal = current.getValue('next_update_on');
-        var displayString = '';
+  try {
+    var nextUpdateVal = current.getValue("next_update_on");
+    var displayString = "";
 
-        if (nextUpdateVal) {
-            var gdt = new GlideDateTime(nextUpdateVal);
-            
-            // 1. Get Date Parts using Scoped-safe methods
-            var day = gdt.getDayOfMonthLocalTime();
-            var year = gdt.getYearLocalTime();
-            var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-            var month = monthNames[gdt.getMonthLocalTime() - 1];
+    if (nextUpdateVal) {
+      var gdt = new GlideDateTime(nextUpdateVal);
 
-            // 2. Format Time to 12-hour am/pm
-            // We use getDisplayValue as it respects the user's local time settings
-            var fullDisplay = gdt.getDisplayValue(); 
-            var timePart = fullDisplay.split(' ')[1]; 
-            var hours = parseInt(timePart.split(':')[0], 10);
-            var mins = timePart.split(':')[1];
-            var ampm = hours >= 12 ? 'pm' : 'am';
-            hours = hours % 12;
-            hours = hours ? hours : 12; 
+      // 1. Get Date Parts using Scoped-safe methods
+      var day = gdt.getDayOfMonthLocalTime();
+      var year = gdt.getYearLocalTime();
+      var monthNames = [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December",
+      ];
+      var month = monthNames[gdt.getMonthLocalTime() - 1];
 
-            // 3. Robust Timezone handling for UK-based teams
-            // If we are in the UK, we'll append GMT/BST or simply use "GMT" for clarity
-            var tz = "GMT"; 
-            
-            displayString = day + ' ' + month + ' ' + year + ' at ' + hours + ':' + mins + ampm + ' ' + tz;
-        }
+      // 2. Format Time to 12-hour am/pm
+      // We use getDisplayValue as it respects the user's local time settings
+      var fullDisplay = gdt.getDisplayValue();
+      var timePart = fullDisplay.split(" ")[1];
+      var hours = parseInt(timePart.split(":")[0], 10);
+      var mins = timePart.split(":")[1];
+      var ampm = hours >= 12 ? "pm" : "am";
+      hours = hours % 12;
+      hours = hours ? hours : 12;
 
-        // Generate the Body HTML
-        var body = '<p><span style="font-size: 12pt;">The next update for <strong>' + current.number + '</strong> is due at <strong>' + (displayString || "TBD") + '</strong>. Log into the MSIM workspace to send out your next status report.</span></p><p>&nbsp;</p>';
-        
-        template.print(body);
+      // 3. Robust Timezone handling for UK-based teams
+      // If we are in the UK, we'll append GMT/BST or simply use "GMT" for clarity
+      var tz = "GMT";
 
-    } catch (err) {
-        // This ensures that even if there is a script error, we see it in the logs
-        gs.error("MSIM Mail Script Error: " + err);
+      displayString =
+        day +
+        " " +
+        month +
+        " " +
+        year +
+        " at " +
+        hours +
+        ":" +
+        mins +
+        ampm +
+        " " +
+        tz;
     }
 
-    // 4. Print the rest of the template OUTSIDE the try/catch 
-    // This guarantees the button shows up even if the date logic fails
-    var button = '<p style="text-align: center;"><a style="text-decoration: none; color: white; background: #4F52BD; padding: 8px; border-radius: 5px; border: 1px solid; border-color: #4F52BD; font-size: 16px;" href="/now/msim/major-security-incident/' + current.getUniqueValue() + '"> View ' + current.number + ' in MSIM</a></p>';
-    var openedByText = '<p><span style="font-size: 12pt;">Thank you,</span><br /><span style="font-size: 12pt;">' + current.getDisplayValue('opened_by') + ' (MSIM)</span></p>';
-    
-    template.print(button);
-    template.print(openedByText);
+    // Generate the Body HTML
+    var body =
+      '<p>The <span style="font-size: 12pt;">Security Incident Commander for  <strong>' +
+      current.number +
+      "</strong> is preparing a <strong>status report for senior stakeholders</strong>, scheduled for distribution <strong>" +
+      (displayString || "TBD") +
+      "</strong>.</p><p>Please <strong>review any security response tasks assigned to you</strong> and provide: <ul><li>the current status</li><li>and any relevant comments or updates (including risks, blockers, or expected completion times).</li></ul><br>Thank you for your prompt support in ensuring the status report accurately reflects current progress.<br><br></p>      ";
 
+    template.print(body);
+  } catch (err) {
+    // This ensures that even if there is a script error, we see it in the logs
+    gs.error("MSIM Mail Script Error: " + err);
+  }
+
+  // 4. Print the rest of the template OUTSIDE the try/catch
+  // This guarantees the button shows up even if the date logic fails
+  var button =
+    '<p style="text-align: center;"><a style="text-decoration: none; color: white; background: #4F52BD; padding: 8px; border-radius: 5px; border: 1px solid; border-color: #4F52BD; font-size: 16px;" href="/now/msim/major-security-incident/' +
+    current.getUniqueValue() +
+    '"> View ' +
+    current.number +
+    " in MSIM</a></p>";
+  var openedByText =
+    '<p><span style="font-size: 12pt;">Kind regards,</span><br /><span style="font-size: 12pt;">' +
+    current.getDisplayValue("opened_by") +
+    " (MSIM)</span></p>";
+
+  template.print(button);
+  template.print(openedByText);
 })(current, template, email, email_action, event);
 ```
