@@ -1,4 +1,5 @@
-# Add friednly date to notification
+# Add frendly date to notification
+- Adds a friendly date to the notification.
 
 ```javascript
   (function runMailScript(current, template, email, email_action, event) {
