@@ -1,1 +1,71 @@
+// Orange chat aided report template and script for MSIM Executice report
+(function runMailScript(current, template, email, email_action, event) {
+    try {
+        // Get the incident number - IMPROVED METHOD
+        var incidentNumber = getMsimNumber(current);
+        var taskNumber = current.getValue("number");
+        var Unknown = "Unknown";
 
+        // Generate the Body HTML
+        var body = `<p>
+            You have been assigned a task <strong>${taskNumber}</strong> for Major Security incident <strong>${incidentNumber || Unknown}</strong>.
+        </p>
+        <p>
+            <strong>Description:</strong><br/>
+            ${current.getValue("description")}
+        </p>
+        <p>
+            Please investigate the requirements and update the task due date (if known).
+        </p>
+        <p>
+            Thank you for your prompt support.
+        </p>`;
+
+        template.print(body);
+    } catch (err) {
+        // This ensures that even if there is a script error, we see it in the logs
+        gs.error("MSIM Mail Script Error: " + err);
+    }
+
+    // Print the rest of the template OUTSIDE the try/catch
+    // This guarantees the button shows up even if the date logic fails
+    var button = `
+        <p style="text-align: center;">
+            <a style="text-decoration: none; color: white; background: #4F52BD; padding: 8px; border-radius: 5px; border: 1px solid; border-color: #4F52BD; font-size: 16px;" 
+               href="/now/msim/major-security-incident/${current.getUniqueValue()}">
+                View ${current.number} in MSIM
+            </a>
+        </p>
+    `;
+    var openedByText = `
+        <p>
+            <span style="font-size: 12pt;">
+                Kind regards,
+            </span>
+            <br />
+            <span style="font-size: 12pt;">
+                ${current.getDisplayValue("opened_by")} (MSIM)
+            </span>
+        </p>
+    `;
+
+    template.print(button);
+    template.print(openedByText);
+
+    // Function to get the MSIM number safely
+    function getMsimNumber(taskRecord) {
+        var parentIncident = taskRecord.getValue("parent"); // Get the sys_id of the parent
+        if (parentIncident) {
+            var gr = new GlideRecord("incident"); // Replace "incident" with the correct table name if different
+            if (gr.get(parentIncident)) {
+                return gr.getValue("number");
+            } else {
+                gs.log("Parent incident record not found: " + parentIncident); // Log if the parent record can't be found
+                return null;
+            }
+        } else {
+            gs.log("No parent incident found for task: " + taskRecord.getValue("number")); // Log if no parent is found
+            return null;
+        }
+    }
+})(current, template, email, email_action, event);
