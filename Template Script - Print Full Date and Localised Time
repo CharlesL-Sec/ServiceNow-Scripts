@@ -15,9 +15,27 @@
 
 ```javascript
 (function runTemplateScript(target /*GlideRecord for target task*/ ) {
-  var gdt = new GlideDateTime();
-  var currentDate = gdt.getLocalDate(); 
-  var currentTime = gdt.getLocalTime();
-	return [currentDate.getByFormat("E dd MMM yyyy") + " " + currentTime.getByFormat("K:mm a") + " " + gs.getSession().getTimeZoneName()].join(" ");
+    // 1. Get the date field from the MSI record. 
+    // Common MSI fields: 'opened_at', 'work_start', or 'sys_created_on'
+    var msiDate = target.opened_at; 
+
+    // 2. Safety check: if the field is empty, return a fallback message
+    if (!msiDate || msiDate.nil()) {
+        return "Date TBC";
+    }
+
+    // 3. Initialize GlideDateTime using the record's date
+    var gdt = new GlideDateTime(msiDate);
+    
+    var currentDate = gdt.getLocalDate(); 
+    var currentTime = gdt.getLocalTime();
+    
+    // 4. Return the formatted string using your preferred format
+    return [
+        currentDate.getByFormat("EEEE dd MMMM yyyy") + "<br/>" + 
+        currentTime.getByFormat("K:mm a") + " " + 
+        gs.getSession().getTimeZoneName()
+    ].join(" ");
+
 })(target);
 ```
