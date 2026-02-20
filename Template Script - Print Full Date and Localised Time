@@ -1,9 +1,9 @@
 /**
  * Description: Returns the full formatted date to the calling template. e.g. 12th March 2026 11:58 AM Europe/London
- * Application: Security Incident Response
- * Trigger: Called using ${Template_script: fotmatted_current_date from Report Template
- * Developed By: Charles L / Digital Safety ServiceNow Development Team
- * Date: 19th February 2026
+ * Application: Security Incident Response.
+ * Trigger: Called using ${template_script:msi_uk_date_formatter} from Report Template.
+ * Developed By: Charles L / Digital Safety ServiceNow Development Team.
+ * Date: 19th February 2026.
  * Update Set: [Name]
  * Location: All > Major Security Incident Management > MSI Administration > Status Report Setup > Template Scripts 
 **/
