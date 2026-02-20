@@ -12,13 +12,12 @@
 
 
 ### Description: Returns the current local date and time in the DDMMYYYY 00.00 AM or PM format. For example, 21 Jan 2021 3:51 PM PST
-```javascript
 
+```javascript
 (function runTemplateScript(target /*GlideRecord for target task*/ ) {
   var gdt = new GlideDateTime();
   var currentDate = gdt.getLocalDate(); 
   var currentTime = gdt.getLocalTime();
 	return [currentDate.getByFormat("E dd MMM yyyy") + " " + currentTime.getByFormat("K:mm a") + " " + gs.getSession().getTimeZoneName()].join(" ");
 })(target);
-
 ```
