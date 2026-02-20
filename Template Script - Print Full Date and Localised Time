@@ -1,17 +1,15 @@
-https://ejservicenowdev.service-now.com/now/nav/ui/classic/params/target/sn_msi_msim_status_report_config_landing_page.do%3Fsysparm_full_theme_support%3Dtrue
-
-
 /**
-
-  Charles London - 20-02-2026
-
-
+ * Description: Returns the full formatted date to the calling template. e.g. 12th March 2026 11:58 AM Europe/London
+ * Application: Security Incident Response
+ * Trigger: Called using ${Template_script: fotmatted_current_date from Report Template
+ * Developed By: Charles L / Digital Safety ServiceNow Development Team
+ * Date: 19th February 2026
+ * Update Set: [Name]
+ * Location: All > Major Security Incident Management > MSI Administration > Status Report Setup > Template Scripts 
 **/
 
-MSI Status Report Setup > Template Scripts 
-
-
 ### Name: formatted_current_date
+
 
 ### Description: Returns the current local date and time in the DDMMYYYY 00.00 AM or PM format. For example, 21 Jan 2021 3:51 PM PST
 ```javascript
