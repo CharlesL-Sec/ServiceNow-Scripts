@@ -4,7 +4,7 @@
 
 ```javascript
 var gr = new GlideRecord('incident');
-gr.get('<sys_id_of_record>');
-gs.eventQueue('your.event.name', gr, gs.getUserID(), gs.getUserName());
+gr.get('MSI0001024');
+gs.eventQueue('SI EJ Next update reminder', gr, gs.getUserID(), gs.getUserName());
 
 ```
