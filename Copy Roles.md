@@ -1,6 +1,8 @@
 /* Borrowed from  AnveshKumar M 
-/* [Source](https://www.servicenow.com/community/developer-articles/easily-clone-one-user-s-groups-and-roles-to-another-user-in/ta-p/2729316)
 
+
+
+<a href="https://www.servicenow.com/community/developer-articles/easily-clone-one-user-s-groups-and-roles-to-another-user-in/ta-p/2729316" target="_blank">Source</a>  
 
 
 // Created Script include
