@@ -1,5 +1,5 @@
 /* Borrowed from  AnveshKumar M 
-/* [splunk_ej_user](https://www.servicenow.com/community/developer-articles/easily-clone-one-user-s-groups-and-roles-to-another-user-in/ta-p/2729316)
+/* [Source](https://www.servicenow.com/community/developer-articles/easily-clone-one-user-s-groups-and-roles-to-another-user-in/ta-p/2729316)
 
 
 
