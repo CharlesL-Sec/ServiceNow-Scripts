@@ -2,7 +2,7 @@
 
 
 
-<a href="https://www.servicenow.com/community/developer-articles/easily-clone-one-user-s-groups-and-roles-to-another-user-in/ta-p/2729316" target="_blank">Source</a>  
+<a rel="noopener" href="https://www.servicenow.com/community/developer-articles/easily-clone-one-user-s-groups-and-roles-to-another-user-in/ta-p/2729316" target="_blank">Source</a>  
 
 
 // Created Script include
